@@ -10,7 +10,7 @@ export default class App extends Component {
     filter: '',
   };
 
-  addNewContact = data => {
+  onAddNewContact = data => {
     if (this.isDuplicate(data.name))
       return alert(`${data.name} is already in contacts.`);
 
@@ -24,14 +24,14 @@ export default class App extends Component {
     }));
   };
 
-  changeFilter = ({ target: { value } }) => {
+  onChangeFilter = ({ target: { value } }) => {
     this.setState({ filter: value });
   };
 
   isDuplicate = name =>
     this.state.contacts.find(contact => contact.name === name);
 
-  deleteContact = id => {
+  onDeleteContact = id => {
     this.setState(prev => ({
       contacts: prev.contacts.filter(contact => contact.id !== id),
     }));
@@ -41,19 +41,19 @@ export default class App extends Component {
     const { contacts, filter } = this.state;
 
     const filteredContacts = contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
+      name.toLowerCase().trim().includes(filter.toLowerCase().trim())
     );
 
     return (
       <>
         <h1>Phonebook</h1>
-        <ContactForm addNewContact={this.addNewContact} />
+        <ContactForm onAddNewContact={this.onAddNewContact} />
 
         <h2>Contacts</h2>
-        <Filter value={filter} changeFilter={this.changeFilter} />
+        <Filter value={filter} onChangeFilter={this.onChangeFilter} />
         <ContactList
           contacts={filteredContacts}
-          deleteContact={this.deleteContact}
+          onDeleteContact={this.onDeleteContact}
         />
       </>
     );

@@ -15,12 +15,12 @@ export default class ContactForm extends Component {
   handelSubmit = event => {
     event.preventDefault();
 
-    this.props.addNewContact(this.state);
+    this.props.onAddNewContact(this.state);
 
-    this.resetForm();
+    this.onResetForm();
   };
 
-  resetForm = () => {
+  onResetForm = () => {
     this.setState({ name: '', number: '' });
   };
 
@@ -60,5 +60,5 @@ export default class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  addNewContact: PropTypes.func.isRequired,
+  onAddNewContact: PropTypes.func.isRequired,
 };
