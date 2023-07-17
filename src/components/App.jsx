@@ -14,6 +14,9 @@ export default class App extends Component {
     if (this.isDuplicate(data.name))
       return alert(`${data.name} is already in contacts.`);
 
+    if (!Number.isInteger(data.number)) {
+      return alert('Enter a number!');
+    }
     const newContact = {
       id: nanoid(),
       ...data,

@@ -15,7 +15,10 @@ export default class ContactForm extends Component {
   handelSubmit = event => {
     event.preventDefault();
 
-    this.props.onAddNewContact(this.state);
+    this.props.onAddNewContact({
+      ...this.state,
+      number: Number.parseInt(this.state.number),
+    });
 
     this.onResetForm();
   };
