@@ -17,6 +17,7 @@ export default class App extends Component {
     if (!Number.isInteger(data.number)) {
       return alert('Enter a number!');
     }
+
     const newContact = {
       id: nanoid(),
       ...data,
